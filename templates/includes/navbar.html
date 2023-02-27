@@ -1,0 +1,41 @@
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+      <div class="container-fluid">
+        <div>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'inicio' %}">Inicio</a>
+            </li>
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Configuraciones
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="{% url 'organismos_listar' %}">Organismos</a></li>
+                <li><a class="dropdown-item disabled" href="#">Secretarías</a></li>
+                <li><a class="dropdown-item disabled" href="#">Subsecretarías</a></li>
+                <li><a class="dropdown-item disabled" href="#">Programas</a></li>
+                <li><a class="dropdown-item disabled" href="#">Planes Sociales</a></li>
+              </ul>
+            </li>
+            
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">Legajos</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+            <span class="navbar-text">Usuario {{user.username}} | </span>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    

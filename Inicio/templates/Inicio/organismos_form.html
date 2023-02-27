@@ -1,0 +1,126 @@
+{% extends "includes/base.html" %}
+{% load static %}
+{% block title %}Datos Organismos{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-- Content wrapper -->
+<div class="content-wrapper  mb-5">
+
+  <!-- Content -->
+  <div class="container-fluid pt-5">
+
+    <h4 class="fw-bold mb-4"><a href="{% url 'organismos_listar' %}" class="text-muted fw-light text-decoration-none">Organismos/</a>
+      {%if request.resolver_match.url_name == "organismos_editar" %}
+      Editar
+      {% else %}
+      Crear
+      {% endif %}
+    </h4>
+
+    <!-- Basic Layout & Basic with Icons -->
+    <div class="row justify-content-center">
+      <!-- Basic Layout -->
+      <div class="col-xxl-9">
+        <div class="card mt-3">
+          <div class="card-header d-flex align-items-center justify-content-between">
+            <h4 class="mb-3">Datos del Organismo</h4>
+          </div>
+          <div class="card-body">
+            <form method="POST">
+
+              <!-- Security token -->
+              {% csrf_token %}
+              <div class="row mb-3 px-5">
+                <label class="col-sm-2 col-form-label" for="basic-default-name">Nombre</label>
+                <div class="col-sm-10">
+                  {{form.nombre| as_crispy_field}}
+                </div>
+              </div>
+
+              <div class="row mb-3 px-5">
+                <label class="col-sm-2 col-form-label" for="basic-default-name">Tipo</label>
+                <div class="col-sm-10">
+                  {{form.tipo| as_crispy_field}}
+                </div>
+              </div>
+
+              <div class="row mb-3 px-5">
+                <label class="col-sm-2 col-form-label" for="basic-default-name">Referente</label>
+                <div class="col-sm-10">
+                  {{form.referente| as_crispy_field}}
+                </div>
+              </div>
+
+              <div class="row mb-3 px-5">
+                <label class="col-sm-2 col-form-label" for="basic-default-name">Ubicación</label>
+                <div class="col-sm-6">
+                  {{form.calle| as_crispy_field}}
+                </div>
+                <div class="col-sm-2">
+                  {{form.altura| as_crispy_field}}
+                </div>
+                <div class="col-sm-2">
+                  {{form.piso| as_crispy_field}}
+                </div>
+              </div>
+
+              <div class="row mb-3 px-5">
+                <label class="col-sm-2 col-form-label" for="basic-default-name">Barrio</label>
+                <div class="col-sm-10">
+                  {{form.barrio| as_crispy_field}}
+                </div>
+              </div>
+
+              <div class="row mb-3 px-5">
+                <label class="col-sm-2 col-form-label" for="basic-default-name">Localidad</label>
+                <div class="col-sm-10">
+                  {{form.localidad| as_crispy_field}}
+                </div>
+              </div>
+              <div class="row mb-3 px-5">
+                <label class="col-sm-2 col-form-label" for="basic-default-name">Teléfono</label>
+                <div class="col-sm-10">
+                  {{form.telefono| as_crispy_field}}
+                </div>
+              </div>
+              <div class="row mb-3 px-5">
+                <label class="col-sm-2 col-form-label" for="basic-default-name">Email</label>
+                <div class="col-sm-10">
+                  {{form.email| as_crispy_field}}
+                </div>
+              </div>
+              {%if request.resolver_match.url_name == "organismos_editar" %}
+              <div class="row mb-3 px-5">
+                <label class="col-sm-2 col-form-label" for="basic-default-name">Activo</label>
+                <div class="col-sm-10">
+                  {{form.activo| as_crispy_field}}
+                </div>
+              </div>
+              {% endif %}
+
+              <div class="row mb-5 px-5">
+                <label class="col-sm-2 col-form-label" for="basic-default-message">Descripción</label>
+                <div class="col-sm-10">
+                  {{form.obs| as_crispy_field}}
+                </div>
+              </div>
+              <div class="row justify-content-end mb-3 px-5">
+                <div class="col-sm-10 text-end">
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- / Content -->
+
+
+
+{% endblock content%}
+
+{% block customJS %} {% endblock customJS%}

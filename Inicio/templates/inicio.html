@@ -1,0 +1,25 @@
+{% extends "includes/base.html" %}
+{% block title %}Inicio{% endblock %}
+{% block content %}
+
+<br>
+<br>
+
+
+
+
+<div class="container-fluid">
+    <h1>Página de Inicio o Dashboard o loquedé</h1>
+    
+    <div class="row"></div>
+    <h3 class="pt-5">Permisos:</h3>
+    <ul>
+
+        <li>perms.Inicio.add_organismos ={{perms.Inicio.add_organismos}} </li>
+        <li>perms.Inicio.view_organismos ={{perms.Inicio.view_organismos}}</li>
+        <li>perms.Inicio.delete_organismos={{perms.Inicio.delete_organismos}}</li>
+        <li>perms.Inicio.change_organismos={{perms.Inicio.change_organismos1}}</li>
+    </ul>
+
+</div>
+{% endblock %}

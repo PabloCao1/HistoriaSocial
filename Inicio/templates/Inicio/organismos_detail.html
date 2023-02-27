@@ -1,0 +1,118 @@
+{% extends "includes/base.html" %} 
+{% load static %} 
+{% block title %}Datos Organismos{% endblock %}
+
+{% block content %}
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+
+    <!-- Content -->
+
+    <div class="container-fluid pt-5">
+
+          <!-- permission control -->
+        {%if exception %}
+         {{ PermissionDenied }}
+        {%endif%}
+        <!-- end permission control -->
+
+         <!-- successmixxing message -->
+        <div class="row ">
+            <div class="col m-auto">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            </div>
+        </div>
+        <!-- end success message -->
+
+        <h4 class="fw-bold mb-4"><a href="{% url 'organismos_listar' %}" class="text-muted fw-light text-decoration-none">Organismos/</span></a> Detalle</h4>
+
+        <!-- Basic Layout & Basic with Icons -->
+        <div class="row justify-content-center">
+            <!-- Basic Layout -->
+            <div class="col-xxl-9">
+
+                <!-- Card Estados -->
+
+                <div class="row mb-3">
+                    <div class="col-md-md-8">
+                        <div class="card  mb-4 mt-3">
+                            <div class="card-header h4 bg-secondary text-white text-center">{{ object.nombre|upper}}
+                            </div>
+                            <div class="card-body mt-3">
+                                <div class="row g-0">
+                                    <div class="col">
+                                        <div class="row mb-2">
+                                            <div class="d-inline text-end">
+                                                <a href="{% url 'organismos_eliminar' object.id %}"
+                                                    class="btn btn-outline-danger"><i class="bx bx-trash-alt         
+                                                    {% if not perms.Inicio.delete_Organismo %} 
+                                                    disabled
+                                                    {% endif %}"
+                                                        title="Eliminar"></i></a>
+                                                <a href="{% url 'organismos_editar' object.id %}"
+                                                    class="btn btn-outline-success        
+                                                    {% if not perms.Inicio.change_Organismo %} 
+                                                    disabled
+                                                    {% endif %}">
+                                                    <i class="bx bx-edit"
+                                                        title="Editar"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-sm-2 col-form-label" for="barrio">Tipo</label>
+                                            <div class="col-sm-10">
+                                                <p class='card-text pt-2'> {{ object.tipo }}</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row mb-2">
+                                            <label class="col-sm-2 col-form-label" for="barrio">Referente</label>
+                                            <div class="col-sm-10">
+                                                <p class='card-text pt-2'> {{ object.referente }}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2">
+                                            <label class="col-sm-2 col-form-label" for="barrio">Descripción</label>
+                                            <div class="col-sm-10">
+                                                <p class='card-text pt-2'> {{ object.obs|title }}</p>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/ Card Estados -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- / Content -->
+
+{% endblock content %}
+
+
+{% block customJS %}
+<script>
+    $(document).ready(function () {
+
+    // desaparecer los Success messages
+    setTimeout(function () {
+    $(".alert").alert('close');
+    }, 3000);
+
+  
+    });
+  
+  </script>
+ {% endblock %}

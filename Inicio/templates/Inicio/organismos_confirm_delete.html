@@ -1,0 +1,45 @@
+{% extends "includes/base.html" %} {% load static %} {% block title %}Eliminar Orgnaismo{% endblock %}
+
+{% block content %}
+<div class="container-fluid pt-5">
+        <h4 class="fw-bold mb-4"><a href="{% url 'organismos_listar' %}" class="text-muted fw-light text-decoration-none">Organismos/</span></a> Eliminar</h4>
+
+
+        <!-- Basic Layout & Basic with Icons -->
+        <div class="row justify-content-center">
+            <!-- Basic Layout -->
+            <div class="col-xxl-9">
+
+                <!-- Card Eliminar Organizaciones -->
+                <div class="row  mt-5">
+                    <div class="col-md-8 m-auto">
+                        <div class="card  mb-4 mt-2 ">
+                            <div class="card-header shadow-none bg-transparent border border-danger text-center h3 text-danger">
+                                Atención!
+                            </div>
+                            <div class="card-body mt-3">
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        {{ form }}
+                                            <p class="py-3 h5 text-center">Eliminar el Organismo <span
+                                                    class="h4 px-3 fw-bold">{{object.nombre|title}}</span>
+                                                de manera permanente?</p>
+                                            <div class="card-footer text-end py-0">
+                                                <a href="{% url 'organismos_ver' object.id %}"><button type="button" class="btn btn-outline-secondary">Cancelar</button></a>
+                                                <button type="submit" class="btn btn-danger">Confirmar</button>
+                                            </div>
+                                    </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/ Card Organizaciones -->
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- / Content -->
+
+
+{% endblock content%}

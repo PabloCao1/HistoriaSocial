@@ -1,0 +1,103 @@
+{% extends "includes/base.html" %}
+{% block title %}Listar Organismos{% endblock %}
+{% load static %}
+{% block content %}
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+
+  <!-- Content -->
+  <div class="container-fluid pt-5">
+
+    <h4 class="fw-bold mb-4"><a href="{% url 'organismos_listar' %}" class="text-muted fw-light text-decoration-none">Organismos/</span></a> Listar</h4>
+
+         <!-- success message -->
+         <div class="row ">
+          <div class="col m-auto">
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          {% endfor %}
+          {% endif %}
+          </div>
+      </div>
+      <!-- end success message -->
+
+    <!-- Opcion OnePAge-- Para mostrar todas las opciones de cada menu en una sola pagina, en lugar de desplegar el punto de Menu -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white  mb-3 rounded ">
+      <div class="container-fluid py-2">
+        
+        <!-- valido permiso a nivel template -->
+        <a href="{% url 'organismos_crear'%}" class=" btn btn-primary     
+        {% if not perms.Inicio.add_Organismo %} 
+        disabled
+        {% endif %}"
+        >Agregar Organismo</a>
+        
+
+        <form class="d-flex" method='GET'>
+          <input class="form-control me-2" type='text' name='busqueda' value='{{ request.GET.busqueda }}' placeholder="Búsqueda..."
+            aria-label="Search">
+          <button class="btn btn-outline-secondary" type="submit" value="Buscar">Buscar</button>
+        </form>
+
+      </div>
+    </nav>
+    <!-- /Opcion Onepage-->
+
+    <!-- Hoverable Table rows -->
+    <div class="card ">
+      <h4 class="card-header">Listado de Organismos</h4>
+      <div class="table-responsive text-nowrap">
+        <table class="table table-hover mb-5">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Tipo</th>
+              <th>Referente</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+
+            {% for o in object_list %}
+            <tr class="clickable-row " role="button" data-href="{% url 'organismos_ver' o.id %}" title="ver detalle">
+              <td><span class="text-black h6 fw-bold ">{{o.nombre}}</span></td>
+              <td> {{o.tipo |truncatechars:100 }}</td>
+              <td> {{o.referente }}</td>
+              <td> {{o.obs |truncatechars:100 }}</td>
+              
+            </tr>
+            {% empty %}
+            <td class="text-center" colspan="6">-Sin Organismos-</tr>
+              {% endfor %}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--/ Hoverable Table rows -->
+  </div>
+</div>
+{% endblock content %}
+
+{% block customJS %}
+<script>
+  $(document).ready(function () {
+
+  // desaparecer los Success messages
+  setTimeout(function () {
+  $(".alert").alert('close');
+  }, 3000);
+
+  $('.popover-dismiss').popover({
+  trigger: 'focus'
+})
+
+  });
+
+</script>
+{% endblock %}
